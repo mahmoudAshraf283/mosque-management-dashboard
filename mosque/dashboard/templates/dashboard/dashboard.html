@@ -1,0 +1,104 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-primary">
+        <i class="bi bi-building"></i> {% trans "Mosque Management Dashboard" %}
+    </h1>
+    <p class="lead text-muted">إدارة شاملة للمساجد والدعاة والجداول</p>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card stat-card position-relative overflow-hidden" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+            <i class="bi bi-building stat-icon"></i>
+            <div class="card-body position-relative">
+                <h5 class="card-title mb-3">
+                    <i class="bi bi-building-fill"></i> {% trans "Total Mosques" %}
+                </h5>
+                <h2>{{ mosque_count }}</h2>
+                <a href="{% url 'mosque_create' %}" class="btn btn-light mt-3">
+                    <i class="bi bi-plus-circle"></i> {% trans "Add Mosque" %}
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card stat-card position-relative overflow-hidden" style="background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);">
+            <i class="bi bi-person stat-icon"></i>
+            <div class="card-body position-relative">
+                <h5 class="card-title mb-3">
+                    <i class="bi bi-people-fill"></i> مجموع الدعاة
+                </h5>
+                <h2>{{ imam_count }}</h2>
+                <a href="{% url 'imam_create' %}" class="btn btn-light mt-3">
+                    <i class="bi bi-plus-circle"></i> إضافة داعي
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card stat-card position-relative overflow-hidden" style="background: linear-gradient(135deg, #047857 0%, #10b981 100%);">
+            <i class="bi bi-calendar-check stat-icon"></i>
+            <div class="card-body position-relative">
+                <h5 class="card-title mb-3">
+                    <i class="bi bi-calendar2-check-fill"></i> {% trans "Total Schedules" %}
+                </h5>
+                <h2>{{ schedule_count }}</h2>
+                <a href="{% url 'schedule_create' %}" class="btn btn-light mt-3">
+                    <i class="bi bi-plus-circle"></i> {% trans "Add Schedule" %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <h3 class="mb-0">
+            <i class="bi bi-calendar-week"></i> {% trans "Weekly Schedule Overview" %}
+        </h3>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th><i class="bi bi-building"></i> {% trans "Mosque" %}</th>
+                        <th><i class="bi bi-person"></i> الداعي</th>
+                        <th><i class="bi bi-clock"></i> {% trans "Prayer Time" %}</th>
+                        <th><i class="bi bi-whatsapp"></i> {% trans "Contact" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for schedule in schedules %}
+                    <tr>
+                        <td><i class="bi bi-geo-alt-fill text-primary"></i> {{ schedule.mosque.name }}</td>
+                        <td><i class="bi bi-person-badge"></i> {{ schedule.imam.name }}</td>
+                        <td>
+                            <span class="badge bg-primary">{{ schedule.get_prayer_time_display }}</span>
+                        </td>
+                        <td>
+                            <a href="https://wa.me/{{ schedule.imam.get_full_phone }}" class="text-success text-decoration-none" target="_blank">
+                                <i class="bi bi-whatsapp"></i> {{ schedule.imam.get_full_phone }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center py-5">
+                            <i class="bi bi-inbox display-1 text-muted d-block mb-3"></i>
+                            <h5 class="text-muted">{% trans "No schedules created yet." %}</h5>
+                            <a href="{% url 'schedule_create' %}" class="btn btn-primary mt-3">
+                                <i class="bi bi-plus-circle"></i> {% trans "Create one now" %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

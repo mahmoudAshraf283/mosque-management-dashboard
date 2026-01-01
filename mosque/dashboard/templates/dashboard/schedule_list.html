@@ -1,0 +1,63 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-primary"><i class="bi bi-calendar-week-fill"></i> الجدول الأسبوعي</h1>
+    <a href="{% url 'schedule_create' %}" class="btn btn-primary btn-lg">
+        <i class="bi bi-plus-circle"></i> {% trans "Add Schedule" %}
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><i class="bi bi-calendar-fill"></i> اليوم</th>
+                        <th><i class="bi bi-building-fill"></i> {% trans "Mosque" %}</th>
+                        <th><i class="bi bi-person-fill"></i> {% trans "Caller" %}</th>
+                        <th><i class="bi bi-calendar-check-fill"></i> {% trans "Prayer Time" %}</th>
+                        <th><i class="bi bi-telephone-fill"></i> {% trans "Contact" %}</th>
+                        <th><i class="bi bi-pencil-square"></i> {% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for schedule in schedules %}
+                    <tr>
+                        <td style="color: white;"><span class="badge bg-info">{{ schedule.get_weekday_display }}</span></td>
+                        <td style="color: white;">{{ schedule.mosque.name }}</td>
+                        <td style="color: white;">{{ schedule.imam.name }}</td>
+                        <td style="color: white;"><span class="badge bg-primary">{{ schedule.get_prayer_time_display }}</span></td>
+                        <td style="color: white;">
+                            <a href="https://wa.me/{{ schedule.imam.get_full_phone }}" target="_blank" class="text-success">
+                                <i class="bi bi-whatsapp"></i> {{ schedule.imam.get_full_phone }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'schedule_update' schedule.pk %}" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil-fill"></i> {% trans "Edit" %}
+                            </a>
+                            <a href="{% url 'schedule_delete' schedule.pk %}" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash-fill"></i> {% trans "Delete" %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+                            <i class="bi bi-inbox" style="font-size: 4rem; color: #94a3b8;"></i>
+                            <p class="mt-3 text-muted">{% trans "No schedules created yet." %}</p>
+                            <a href="{% url 'schedule_create' %}" class="btn btn-primary">
+                                <i class="bi bi-plus-circle"></i> {% trans "Create one now" %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

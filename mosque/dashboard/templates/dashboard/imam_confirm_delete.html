@@ -1,0 +1,17 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2 class="mb-4">{% trans "Delete Imam" %}</h2>
+
+<div class="alert alert-danger">
+    <p>{% trans "Are you sure you want to delete" %} <strong>{{ imam.name }}</strong>?</p>
+    <p>{% trans "This will also delete all associated schedules." %}</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">{% trans "Yes, Delete" %}</button>
+    <a href="{% url 'imam_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+</form>
+{% endblock %}

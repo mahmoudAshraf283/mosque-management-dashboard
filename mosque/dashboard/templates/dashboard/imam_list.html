@@ -1,0 +1,59 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0"><i class="bi bi-people-fill text-primary"></i> الدعاة</h2>
+    <a href="{% url 'imam_create' %}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> إضافة داعي
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th><i class="bi bi-person"></i> {% trans "Name" %}</th>
+                        <th><i class="bi bi-whatsapp"></i> {% trans "Phone (WhatsApp)" %}</th>
+                        <th><i class="bi bi-envelope"></i> {% trans "Email" %}</th>
+                        <th><i class="bi bi-gear"></i> {% trans "Actions" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for imam in imams %}
+                    <tr>
+                        <td><strong><i class="bi bi-person-badge text-primary"></i> {{ imam.name }}</strong></td>
+                        <td>
+                            <a href="https://wa.me/{{ imam.get_full_phone }}" class="text-success text-decoration-none" target="_blank">
+                                <i class="bi bi-whatsapp"></i> {{ imam.get_full_phone }}
+                            </a>
+                        </td>
+                        <td><i class="bi bi-envelope"></i> {{ imam.email }}</td>
+                        <td>
+                            <a href="{% url 'imam_update' imam.pk %}" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> {% trans "Edit" %}
+                            </a>
+                            <a href="{% url 'imam_delete' imam.pk %}" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i> {% trans "Delete" %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center py-5">
+                            <i class="bi bi-inbox display-1 text-muted d-block mb-3"></i>
+                            <h5 class="text-muted">لا يوجد دعاة.</h5>
+                            <a href="{% url 'imam_create' %}" class="btn btn-primary mt-3">
+                                <i class="bi bi-plus-circle"></i> إضافة واحد الآن
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

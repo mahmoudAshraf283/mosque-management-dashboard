@@ -1,0 +1,425 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-29 22:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: dashboard/forms.py:7
+msgid "Mosque Name"
+msgstr "اسم المسجد"
+
+#: dashboard/forms.py:8 dashboard/models.py:7
+#: dashboard/templates/dashboard/mosque_list.html:12
+msgid "Address"
+msgstr "العنوان"
+
+#: dashboard/forms.py:9
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+#: dashboard/forms.py:17
+msgid "Caller Name"
+msgstr "اسم الداعي"
+
+#: dashboard/forms.py:19 dashboard/templates/dashboard/imam_list.html:12
+msgid "Phone (WhatsApp)"
+msgstr "الهاتف (واتساب)"
+
+#: dashboard/forms.py:20
+msgid "Email (optional)"
+msgstr "البريد الإلكتروني (اختياري)"
+
+#: dashboard/forms.py:28 dashboard/models.py:11 dashboard/models.py:77
+#: dashboard/templates/dashboard/dashboard.html:42
+#: dashboard/templates/dashboard/mosque_form.html:5
+#: dashboard/templates/dashboard/schedule_list.html:11
+msgid "Mosque"
+msgstr "المسجد"
+
+#: dashboard/forms.py:29 dashboard/models.py:47 dashboard/models.py:78
+#: dashboard/templates/dashboard/dashboard.html:43
+#: dashboard/templates/dashboard/imam_form.html:5
+#: dashboard/templates/dashboard/schedule_list.html:12
+msgid "Caller"
+msgstr "الداعي"
+
+#: dashboard/forms.py:30
+msgid "Day of Week"
+msgstr "يوم الأسبوع"
+
+#: dashboard/forms.py:31 dashboard/models.py:80
+#: dashboard/templates/dashboard/dashboard.html:44
+#: dashboard/templates/dashboard/schedule_list.html:13
+msgid "Prayer Time"
+msgstr "وقت الصلاة"
+
+#: dashboard/forms.py:32
+msgid "Notes (optional)"
+msgstr "ملاحظات (اختياري)"
+
+#: dashboard/models.py:6 dashboard/models.py:41
+#: dashboard/templates/dashboard/imam_list.html:11
+#: dashboard/templates/dashboard/mosque_list.html:11
+msgid "Name"
+msgstr "الاسم"
+
+#: dashboard/models.py:8 dashboard/models.py:43
+#: dashboard/templates/dashboard/mosque_list.html:13
+msgid "Phone"
+msgstr "الهاتف"
+
+#: dashboard/models.py:12 dashboard/templates/dashboard/base.html:39
+#: dashboard/templates/dashboard/mosque_list.html:5
+msgid "Mosques"
+msgstr "المساجد"
+
+#: dashboard/models.py:20
+msgid "Saudi Arabia (+966)"
+msgstr "السعودية (+966)"
+
+#: dashboard/models.py:21
+msgid "UAE (+971)"
+msgstr "الإمارات (+971)"
+
+#: dashboard/models.py:22
+msgid "Kuwait (+965)"
+msgstr "الكويت (+965)"
+
+#: dashboard/models.py:23
+msgid "Bahrain (+973)"
+msgstr "البحرين (+973)"
+
+#: dashboard/models.py:24
+msgid "Qatar (+974)"
+msgstr "قطر (+974)"
+
+#: dashboard/models.py:25
+msgid "Oman (+968)"
+msgstr "عمان (+968)"
+
+#: dashboard/models.py:26
+msgid "Egypt (+20)"
+msgstr "مصر (+20)"
+
+#: dashboard/models.py:27
+msgid "Jordan (+962)"
+msgstr "الأردن (+962)"
+
+#: dashboard/models.py:28
+msgid "Lebanon (+961)"
+msgstr "لبنان (+961)"
+
+#: dashboard/models.py:29
+msgid "Syria (+963)"
+msgstr "سوريا (+963)"
+
+#: dashboard/models.py:30
+msgid "Iraq (+964)"
+msgstr "العراق (+964)"
+
+#: dashboard/models.py:31
+msgid "Yemen (+967)"
+msgstr "اليمن (+967)"
+
+#: dashboard/models.py:32
+msgid "Libya (+218)"
+msgstr "ليبيا (+218)"
+
+#: dashboard/models.py:33
+msgid "Morocco (+212)"
+msgstr "المغرب (+212)"
+
+#: dashboard/models.py:34
+msgid "Algeria (+213)"
+msgstr "الجزائر (+213)"
+
+#: dashboard/models.py:35
+msgid "Tunisia (+216)"
+msgstr "تونس (+216)"
+
+#: dashboard/models.py:36
+msgid "Sudan (+249)"
+msgstr "السودان (+249)"
+
+#: dashboard/models.py:37
+msgid "USA/Canada (+1)"
+msgstr "أمريكا/كندا (+1)"
+
+#: dashboard/models.py:38
+msgid "UK (+44)"
+msgstr "بريطانيا (+44)"
+
+#: dashboard/models.py:43
+msgid "WhatsApp number without country code"
+msgstr "رقم الواتساب بدون رمز الدولة"
+
+#: dashboard/models.py:44 dashboard/templates/dashboard/imam_list.html:13
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: dashboard/models.py:48 dashboard/templates/dashboard/base.html:40
+#: dashboard/templates/dashboard/imam_list.html:5
+msgid "Callers"
+msgstr "الدعاة"
+
+#: dashboard/models.py:60
+msgid "Saturday"
+msgstr "السبت"
+
+#: dashboard/models.py:61
+msgid "Sunday"
+msgstr "الأحد"
+
+#: dashboard/models.py:62
+msgid "Monday"
+msgstr "الاثنين"
+
+#: dashboard/models.py:63
+msgid "Tuesday"
+msgstr "الثلاثاء"
+
+#: dashboard/models.py:64
+msgid "Wednesday"
+msgstr "الأربعاء"
+
+#: dashboard/models.py:65
+msgid "Thursday"
+msgstr "الخميس"
+
+#: dashboard/models.py:66
+msgid "Friday"
+msgstr "الجمعة"
+
+#: dashboard/models.py:70
+msgid "Fajr"
+msgstr "الفجر"
+
+#: dashboard/models.py:71
+msgid "Dhuhr"
+msgstr "الظهر"
+
+#: dashboard/models.py:72
+msgid "Asr"
+msgstr "العصر"
+
+#: dashboard/models.py:73
+msgid "Maghrib"
+msgstr "المغرب"
+
+#: dashboard/models.py:74
+msgid "Isha"
+msgstr "العشاء"
+
+#: dashboard/models.py:79
+msgid "Weekday"
+msgstr "اليوم"
+
+#: dashboard/models.py:81 dashboard/templates/dashboard/schedule_list.html:15
+msgid "Notes"
+msgstr "ملاحظات"
+
+#: dashboard/models.py:84 dashboard/templates/dashboard/base.html:41
+#: dashboard/templates/dashboard/schedule_form.html:5
+msgid "Schedule"
+msgstr "الجدول"
+
+#: dashboard/models.py:85
+msgid "Schedules"
+msgstr "الجداول"
+
+#: dashboard/templates/dashboard/base.html:7
+#: dashboard/templates/dashboard/base.html:32
+msgid "Mosque Dashboard"
+msgstr "لوحة تحكم المساجد"
+
+#: dashboard/templates/dashboard/base.html:38
+msgid "Home"
+msgstr "الرئيسية"
+
+#: dashboard/templates/dashboard/dashboard.html:5
+msgid "Mosque Management Dashboard"
+msgstr "لوحة تحكم إدارة المساجد"
+
+#: dashboard/templates/dashboard/dashboard.html:11
+msgid "Total Mosques"
+msgstr "مجموع المساجد"
+
+#: dashboard/templates/dashboard/dashboard.html:13
+#: dashboard/templates/dashboard/mosque_list.html:6
+msgid "Add Mosque"
+msgstr "إضافة مسجد"
+
+#: dashboard/templates/dashboard/dashboard.html:20
+msgid "Total Callers"
+msgstr "مجموع الدعاة"
+
+#: dashboard/templates/dashboard/dashboard.html:22
+#: dashboard/templates/dashboard/imam_list.html:6
+msgid "Add Caller"
+msgstr "إضافة داعي"
+
+#: dashboard/templates/dashboard/dashboard.html:29
+msgid "Total Schedules"
+msgstr "مجموع الجداول"
+
+#: dashboard/templates/dashboard/dashboard.html:31
+#: dashboard/templates/dashboard/schedule_list.html:6
+msgid "Add Schedule"
+msgstr "إضافة جدول"
+
+#: dashboard/templates/dashboard/dashboard.html:37
+msgid "Weekly Schedule Overview"
+msgstr "نظرة عامة على الجدول الأسبوعي"
+
+#: dashboard/templates/dashboard/dashboard.html:45
+#: dashboard/templates/dashboard/schedule_list.html:14
+msgid "Contact"
+msgstr "الاتصال"
+
+#: dashboard/templates/dashboard/dashboard.html:57
+#: dashboard/templates/dashboard/schedule_list.html:33
+msgid "No schedules created yet."
+msgstr "لم يتم إنشاء جداول بعد."
+
+#: dashboard/templates/dashboard/dashboard.html:57
+#: dashboard/templates/dashboard/schedule_list.html:33
+msgid "Create one now"
+msgstr "أنشئ واحدًا الآن"
+
+#: dashboard/templates/dashboard/imam_confirm_delete.html:5
+msgid "Delete Caller"
+msgstr "حذف داعي"
+
+#: dashboard/templates/dashboard/imam_confirm_delete.html:8
+#: dashboard/templates/dashboard/mosque_confirm_delete.html:8
+msgid "Are you sure you want to delete"
+msgstr "هل أنت متأكد من أنك تريد الحذف"
+
+#: dashboard/templates/dashboard/imam_confirm_delete.html:9
+#: dashboard/templates/dashboard/mosque_confirm_delete.html:9
+msgid "This will also delete all associated schedules."
+msgstr "سيؤدي هذا أيضًا إلى حذف جميع الجداول المرتبطة."
+
+#: dashboard/templates/dashboard/imam_confirm_delete.html:14
+#: dashboard/templates/dashboard/mosque_confirm_delete.html:14
+#: dashboard/templates/dashboard/schedule_confirm_delete.html:13
+msgid "Yes, Delete"
+msgstr "نعم، احذف"
+
+#: dashboard/templates/dashboard/imam_confirm_delete.html:15
+#: dashboard/templates/dashboard/imam_form.html:19
+#: dashboard/templates/dashboard/mosque_confirm_delete.html:15
+#: dashboard/templates/dashboard/mosque_form.html:19
+#: dashboard/templates/dashboard/schedule_confirm_delete.html:14
+#: dashboard/templates/dashboard/schedule_form.html:19
+msgid "Cancel"
+msgstr "إلغاء"
+
+#: dashboard/templates/dashboard/imam_form.html:18
+#: dashboard/templates/dashboard/mosque_form.html:18
+#: dashboard/templates/dashboard/schedule_form.html:18
+msgid "Save"
+msgstr "حفظ"
+
+#: dashboard/templates/dashboard/imam_list.html:14
+#: dashboard/templates/dashboard/mosque_list.html:14
+#: dashboard/templates/dashboard/schedule_list.html:16
+msgid "Actions"
+msgstr "الإجراءات"
+
+#: dashboard/templates/dashboard/imam_list.html:24
+#: dashboard/templates/dashboard/mosque_list.html:24
+#: dashboard/templates/dashboard/schedule_list.html:28 dashboard/views.py:60
+#: dashboard/views.py:100 dashboard/views.py:150
+msgid "Edit"
+msgstr "تعديل"
+
+#: dashboard/templates/dashboard/imam_list.html:25
+#: dashboard/templates/dashboard/mosque_list.html:25
+#: dashboard/templates/dashboard/schedule_list.html:29
+msgid "Delete"
+msgstr "حذف"
+
+#: dashboard/templates/dashboard/imam_list.html:29
+msgid "No callers found."
+msgstr "لم يتم العثور على دعاة."
+
+#: dashboard/templates/dashboard/imam_list.html:29
+#: dashboard/templates/dashboard/mosque_list.html:29
+msgid "Add one now"
+msgstr "أضف واحدًا الآن"
+
+#: dashboard/templates/dashboard/mosque_confirm_delete.html:5
+msgid "Delete Mosque"
+msgstr "حذف مسجد"
+
+#: dashboard/templates/dashboard/mosque_list.html:29
+msgid "No mosques found."
+msgstr "لم يتم العثور على مساجد."
+
+#: dashboard/templates/dashboard/schedule_confirm_delete.html:5
+msgid "Delete Schedule"
+msgstr "حذف جدول"
+
+#: dashboard/templates/dashboard/schedule_confirm_delete.html:8
+msgid "Are you sure you want to delete this schedule?"
+msgstr "هل أنت متأكد من أنك تريد حذف هذا الجدول؟"
+
+#: dashboard/templates/dashboard/schedule_list.html:5
+msgid "Weekly Schedule"
+msgstr "الجدول الأسبوعي"
+
+#: dashboard/views.py:43
+msgid "Mosque added successfully!"
+msgstr "تمت إضافة المسجد بنجاح!"
+
+#: dashboard/views.py:47 dashboard/views.py:87 dashboard/views.py:137
+msgid "Add"
+msgstr "إضافة"
+
+#: dashboard/views.py:56
+msgid "Mosque updated successfully!"
+msgstr "تم تحديث المسجد بنجاح!"
+
+#: dashboard/views.py:67
+msgid "Mosque deleted successfully!"
+msgstr "تم حذف المسجد بنجاح!"
+
+#: dashboard/views.py:83
+msgid "Caller added successfully!"
+msgstr "تمت إضافة الداعي بنجاح!"
+
+#: dashboard/views.py:96
+msgid "Caller updated successfully!"
+msgstr "تم تحديث الداعي بنجاح!"
+
+#: dashboard/views.py:107
+msgid "Caller deleted successfully!"
+msgstr "تم حذف الداعي بنجاح!"
+
+#: dashboard/views.py:133
+msgid "Schedule added successfully!"
+msgstr "تمت إضافة الجدول بنجاح!"
+
+#: dashboard/views.py:146
+msgid "Schedule updated successfully!"
+msgstr "تم تحديث الجدول بنجاح!"
+
+#: dashboard/views.py:157
+msgid "Schedule deleted successfully!"
+msgstr "تم حذف الجدول بنجاح!"
