@@ -51,7 +51,7 @@ services:
       - DATABASE_PORT=5432
       - DATABASE_NAME=mosque_db
       - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
+      - DATABASE_PASSWORD=
       - WHATSAPP_SERVICE_URL=http://whatsapp:3000
     depends_on:
       postgres:
