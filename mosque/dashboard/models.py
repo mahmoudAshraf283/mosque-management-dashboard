@@ -57,21 +57,21 @@ class Imam(models.Model):
 
 class Schedule(models.Model):
     WEEKDAY_CHOICES = [
-        (0, _('Saturday')),
-        (1, _('Sunday')),
-        (2, _('Monday')),
-        (3, _('Tuesday')),
-        (4, _('Wednesday')),
-        (5, _('Thursday')),
-        (6, _('Friday')),
+        (0, 'السبت'),
+        (1, 'الأحد'),
+        (2, 'الإثنين'),
+        (3, 'الثلاثاء'),
+        (4, 'الأربعاء'),
+        (5, 'الخميس'),
+        (6, 'الجمعة'),
     ]
     
     PRAYER_TIME_CHOICES = [
-        ('fajr', _('Fajr')),
-        ('dhuhr', _('Dhuhr')),
-        ('asr', _('Asr')),
-        ('maghrib', _('Maghrib')),
-        ('isha', _('Isha')),
+        ('fajr', 'الفجر'),
+        ('dhuhr', 'الظهر'),
+        ('asr', 'العصر'),
+        ('maghrib', 'المغرب'),
+        ('isha', 'العشاء'),
     ]
 
     mosque = models.ForeignKey(Mosque, on_delete=models.CASCADE, verbose_name=_('Mosque'))
