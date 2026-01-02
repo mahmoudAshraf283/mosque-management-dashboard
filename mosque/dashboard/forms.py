@@ -1,12 +1,11 @@
 from django import forms
 from .models import Mosque, Imam, Schedule
-from django.utils.translation import gettext_lazy as _
 
 
 class MosqueForm(forms.ModelForm):
-    name = forms.CharField(label=_('Mosque Name'), widget=forms.TextInput(attrs={'class': 'form-control'}))
-    address = forms.CharField(label=_('Address'), widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}))
-    phone = forms.CharField(label=_('Phone Number'), required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    name = forms.CharField(label='اسم المسجد', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    address = forms.CharField(label='العنوان', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}))
+    phone = forms.CharField(label='رقم الهاتف', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Mosque
@@ -14,10 +13,10 @@ class MosqueForm(forms.ModelForm):
 
 
 class ImamForm(forms.ModelForm):
-    name = forms.CharField(label=_('Caller Name'), widget=forms.TextInput(attrs={'class': 'form-control'}))
-    country_code = forms.ChoiceField(choices=Imam.COUNTRY_CODES, widget=forms.Select(attrs={'class': 'form-select'}))
-    phone = forms.CharField(label=_('Phone (WhatsApp)'), widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g., 501234567'}))
-    email = forms.EmailField(label=_('Email (optional)'), required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    name = forms.CharField(label='اسم الداعي', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    country_code = forms.ChoiceField(label='كود الدولة', choices=Imam.COUNTRY_CODES, widget=forms.Select(attrs={'class': 'form-select'}))
+    phone = forms.CharField(label='الهاتف (واتساب)', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'مثال: 501234567'}))
+    email = forms.EmailField(label='البريد الإلكتروني (اختياري)', required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Imam
@@ -25,11 +24,11 @@ class ImamForm(forms.ModelForm):
 
 
 class ScheduleForm(forms.ModelForm):
-    mosque = forms.ModelChoiceField(queryset=Mosque.objects.all(), label=_('Mosque'), widget=forms.Select(attrs={'class': 'form-select'}))
-    imam = forms.ModelChoiceField(queryset=Imam.objects.all(), label=_('Caller'), widget=forms.Select(attrs={'class': 'form-select'}))
-    weekday = forms.ChoiceField(choices=Schedule.WEEKDAY_CHOICES, label=_('Day of Week'), widget=forms.Select(attrs={'class': 'form-select'}))
-    prayer_time = forms.ChoiceField(choices=Schedule.PRAYER_TIME_CHOICES, label=_('Prayer Time'), widget=forms.Select(attrs={'class': 'form-select'}))
-    notes = forms.CharField(label=_('Notes (optional)'), required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}))
+    mosque = forms.ModelChoiceField(queryset=Mosque.objects.all(), label='المسجد', widget=forms.Select(attrs={'class': 'form-select'}))
+    imam = forms.ModelChoiceField(queryset=Imam.objects.all(), label='الداعي', widget=forms.Select(attrs={'class': 'form-select'}))
+    weekday = forms.ChoiceField(choices=Schedule.WEEKDAY_CHOICES, label='يوم الأسبوع', widget=forms.Select(attrs={'class': 'form-select'}))
+    prayer_time = forms.ChoiceField(choices=Schedule.PRAYER_TIME_CHOICES, label='وقت الصلاة', widget=forms.Select(attrs={'class': 'form-select'}))
+    notes = forms.CharField(label='ملاحظات (اختياري)', required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}))
 
     class Meta:
         model = Schedule
