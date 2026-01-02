@@ -45,7 +45,7 @@ def mosque_create(request):
             return redirect('mosque_list')
     else:
         form = MosqueForm()
-    return render(request, 'dashboard/mosque_form.html', {'form': form, 'action': _('Add')})
+    return render(request, 'dashboard/mosque_form.html', {'form': form, 'action': 'إضافة'})
 
 
 def mosque_update(request, pk):
@@ -58,7 +58,7 @@ def mosque_update(request, pk):
             return redirect('mosque_list')
     else:
         form = MosqueForm(instance=mosque)
-    return render(request, 'dashboard/mosque_form.html', {'form': form, 'action': _('Edit')})
+    return render(request, 'dashboard/mosque_form.html', {'form': form, 'action': 'تعديل'})
 
 
 def mosque_delete(request, pk):
@@ -85,7 +85,7 @@ def imam_create(request):
             return redirect('imam_list')
     else:
         form = ImamForm()
-    return render(request, 'dashboard/imam_form.html', {'form': form, 'action': _('Add')})
+    return render(request, 'dashboard/imam_form.html', {'form': form, 'action': 'إضافة'})
 
 
 def imam_update(request, pk):
@@ -98,7 +98,7 @@ def imam_update(request, pk):
             return redirect('imam_list')
     else:
         form = ImamForm(instance=imam)
-    return render(request, 'dashboard/imam_form.html', {'form': form, 'action': _('Edit')})
+    return render(request, 'dashboard/imam_form.html', {'form': form, 'action': 'تعديل'})
 
 
 def imam_delete(request, pk):
@@ -135,7 +135,7 @@ def schedule_create(request):
             return redirect('schedule_list')
     else:
         form = ScheduleForm()
-    return render(request, 'dashboard/schedule_form.html', {'form': form, 'action': _('Add')})
+    return render(request, 'dashboard/schedule_form.html', {'form': form, 'action': 'إضافة'})
 
 
 def schedule_update(request, pk):
@@ -148,7 +148,7 @@ def schedule_update(request, pk):
             return redirect('schedule_list')
     else:
         form = ScheduleForm(instance=schedule)
-    return render(request, 'dashboard/schedule_form.html', {'form': form, 'action': _('Edit')})
+    return render(request, 'dashboard/schedule_form.html', {'form': form, 'action': 'تعديل'})
 
 
 def schedule_delete(request, pk):

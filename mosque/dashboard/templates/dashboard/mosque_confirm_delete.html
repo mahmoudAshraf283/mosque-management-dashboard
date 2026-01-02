@@ -2,16 +2,16 @@
 {% load i18n %}
 
 {% block content %}
-<h2 class="mb-4">{% trans "Delete Mosque" %}</h2>
+<h2 class="mb-4">حلحذف مسجد</h2>
 
 <div class="alert alert-danger">
-    <p>{% trans "Are you sure you want to delete" %} <strong>{{ mosque.name }}</strong>?</p>
-    <p>{% trans "This will also delete all associated schedules." %}</p>
+    <p>هل أنت متأكد من أنك تريد حذف <strong>{{ mosque.name }}</strong>؟</p>
+    <p>سيتم أيضًا حذف جميع الجداول المرتبطة.</p>
 </div>
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">{% trans "Yes, Delete" %}</button>
-    <a href="{% url 'mosque_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    <button type="submit" class="btn btn-danger">نعم، احذف</button>
+    <a href="{% url 'mosque_list' %}" class="btn btn-secondary">إلغاء</a>
 </form>
 {% endblock %}

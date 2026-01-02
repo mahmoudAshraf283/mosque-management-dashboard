@@ -15,10 +15,10 @@
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th><i class="bi bi-person"></i> {% trans "Name" %}</th>
-                        <th><i class="bi bi-whatsapp"></i> {% trans "Phone (WhatsApp)" %}</th>
-                        <th><i class="bi bi-envelope"></i> {% trans "Email" %}</th>
-                        <th><i class="bi bi-gear"></i> {% trans "Actions" %}</th>
+                        <th><i class="bi bi-person"></i> الاسم</th>
+                        <th><i class="bi bi-whatsapp"></i> الهاتف (واتساب)</th>
+                        <th><i class="bi bi-envelope"></i> البريد الإلكتروني</th>
+                        <th><i class="bi bi-gear"></i> الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,10 +33,10 @@
                         <td><i class="bi bi-envelope"></i> {{ imam.email }}</td>
                         <td>
                             <a href="{% url 'imam_update' imam.pk %}" class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> {% trans "Edit" %}
+                                <i class="bi bi-pencil"></i> تعديل
                             </a>
                             <a href="{% url 'imam_delete' imam.pk %}" class="btn btn-sm btn-danger">
-                                <i class="bi bi-trash"></i> {% trans "Delete" %}
+                                <i class="bi bi-trash"></i> حذف
                             </a>
                         </td>
                     </tr>

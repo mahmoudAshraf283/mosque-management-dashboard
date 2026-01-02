@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h2 class="mb-4">{{ action }} {% trans "Imam" %}</h2>
+<h2 class="mb-4">{{ action }} داعي</h2>
 
 <form method="post">
     {% csrf_token %}
@@ -15,7 +15,7 @@
             {% endif %}
         </div>
     {% endfor %}
-    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
-    <a href="{% url 'imam_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    <button type="submit" class="btn btn-primary">حفظ</button>
+    <a href="{% url 'imam_list' %}" class="btn btn-secondary">إلغاء</a>
 </form>
 {% endblock %}
