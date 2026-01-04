@@ -24,9 +24,11 @@
                 <tbody>
                     {% for mosque in mosques %}
                     <tr>
-                        <td><strong><i class="bi bi-building text-primary"></i> {{ mosque.name }}</strong></td>
+                        <td>
+                            <strong><i class="bi bi-building text-primary"></i> {{ mosque.name }}</strong>
+                        </td>
                         <td><i class="bi bi-geo-alt-fill text-danger"></i> {{ mosque.address }}</td>
-                        <td><i class="bi bi-phone"></i> {{ mosque.phone }}</td>
+                        <td><i class="bi bi-phone"></i> {{ mosque.get_full_phone|default:"غير متوفر" }}</td>
                         <td>
                             <a href="{% url 'mosque_update' mosque.pk %}" class="btn btn-sm btn-warning">
                                 <i class="bi bi-pencil"></i> تعديل

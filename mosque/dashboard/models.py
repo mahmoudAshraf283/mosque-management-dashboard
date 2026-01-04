@@ -3,9 +3,32 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Mosque(models.Model):
+    COUNTRY_CODES = [
+        ('+966', _('Saudi Arabia (+966)')),
+        ('+971', _('UAE (+971)')),
+        ('+965', _('Kuwait (+965)')),
+        ('+973', _('Bahrain (+973)')),
+        ('+974', _('Qatar (+974)')),
+        ('+968', _('Oman (+968)')),
+        ('+20', _('Egypt (+20)')),
+        ('+962', _('Jordan (+962)')),
+        ('+961', _('Lebanon (+961)')),
+        ('+963', _('Syria (+963)')),
+        ('+964', _('Iraq (+964)')),
+        ('+967', _('Yemen (+967)')),
+        ('+218', _('Libya (+218)')),
+        ('+212', _('Morocco (+212)')),
+        ('+213', _('Algeria (+213)')),
+        ('+216', _('Tunisia (+216)')),
+        ('+249', _('Sudan (+249)')),
+        ('+1', _('USA/Canada (+1)')),
+        ('+44', _('UK (+44)')),
+    ]
+    
     name = models.CharField(_('Name'), max_length=200)
     address = models.TextField(_('Address'))
-    phone = models.CharField(_('Phone'), max_length=20, blank=True)
+    country_code = models.CharField(max_length=5, choices=COUNTRY_CODES, default='+966', blank=True)
+    phone = models.CharField(_('Phone'), max_length=20, blank=True, help_text=_('Phone number without country code'))
 
     class Meta:
         verbose_name = _('Mosque')
@@ -13,6 +36,12 @@ class Mosque(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_full_phone(self):
+        """Return full phone number with country code"""
+        if self.phone and self.country_code:
+            return f"{self.country_code}{self.phone}"
+        return self.phone or ''
 
 
 class Imam(models.Model):

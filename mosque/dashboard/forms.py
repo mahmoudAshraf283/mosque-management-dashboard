@@ -5,15 +5,16 @@ from .models import Mosque, Imam, Schedule
 class MosqueForm(forms.ModelForm):
     name = forms.CharField(label='اسم المسجد', widget=forms.TextInput(attrs={'class': 'form-control'}))
     address = forms.CharField(label='العنوان', widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}))
-    phone = forms.CharField(label='رقم الهاتف', required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    country_code = forms.ChoiceField(label='رمز الدولة', choices=Mosque.COUNTRY_CODES, widget=forms.Select(attrs={'class': 'form-select'}))
+    phone = forms.CharField(label='رقم الهاتف', required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'بدون رمز الدولة'}))
 
     class Meta:
         model = Mosque
-        fields = ['name', 'address', 'phone']
+        fields = ['name', 'address', 'country_code', 'phone']
 
 
 class ImamForm(forms.ModelForm):
-    name = forms.CharField(label='اسم الداعي', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    name = forms.CharField(label='اسم الداعية', widget=forms.TextInput(attrs={'class': 'form-control'}))
     country_code = forms.ChoiceField(label='كود الدولة', choices=Imam.COUNTRY_CODES, widget=forms.Select(attrs={'class': 'form-select'}))
     phone = forms.CharField(label='الهاتف (واتساب)', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'مثال: 501234567'}))
     email = forms.EmailField(label='البريد الإلكتروني (اختياري)', required=False, widget=forms.EmailInput(attrs={'class': 'form-control'}))
@@ -25,7 +26,7 @@ class ImamForm(forms.ModelForm):
 
 class ScheduleForm(forms.ModelForm):
     mosque = forms.ModelChoiceField(queryset=Mosque.objects.all(), label='المسجد', widget=forms.Select(attrs={'class': 'form-select'}))
-    imam = forms.ModelChoiceField(queryset=Imam.objects.all(), label='الداعي', widget=forms.Select(attrs={'class': 'form-select'}))
+    imam = forms.ModelChoiceField(queryset=Imam.objects.all(), label='الداعية', widget=forms.Select(attrs={'class': 'form-select'}))
     weekday = forms.ChoiceField(choices=Schedule.WEEKDAY_CHOICES, label='يوم الأسبوع', widget=forms.Select(attrs={'class': 'form-select'}))
     prayer_time = forms.ChoiceField(choices=Schedule.PRAYER_TIME_CHOICES, label='وقت الصلاة', widget=forms.Select(attrs={'class': 'form-select'}))
     notes = forms.CharField(label='ملاحظات (اختياري)', required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 3}))

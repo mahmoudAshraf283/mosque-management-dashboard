@@ -34,7 +34,7 @@ msgstr "رقم الهاتف"
 
 #: dashboard/forms.py:17
 msgid "Caller Name"
-msgstr "اسم الداعي"
+msgstr "اسم الداعية"
 
 #: dashboard/forms.py:19 dashboard/templates/dashboard/imam_list.html:12
 msgid "Phone (WhatsApp)"
@@ -56,7 +56,7 @@ msgstr "المسجد"
 #: dashboard/templates/dashboard/imam_form.html:5
 #: dashboard/templates/dashboard/schedule_list.html:12
 msgid "Caller"
-msgstr "الداعي"
+msgstr "الداعية"
 
 #: dashboard/forms.py:30
 msgid "Day of Week"
@@ -271,7 +271,7 @@ msgstr "مجموع الدعاة"
 #: dashboard/templates/dashboard/dashboard.html:22
 #: dashboard/templates/dashboard/imam_list.html:6
 msgid "Add Caller"
-msgstr "إضافة داعي"
+msgstr "إضافة داعية"
 
 #: dashboard/templates/dashboard/dashboard.html:29
 msgid "Total Schedules"
@@ -303,7 +303,7 @@ msgstr "أنشئ واحدًا الآن"
 
 #: dashboard/templates/dashboard/imam_confirm_delete.html:5
 msgid "Delete Caller"
-msgstr "حذف داعي"
+msgstr "حذف داعية"
 
 #: dashboard/templates/dashboard/imam_confirm_delete.html:8
 #: dashboard/templates/dashboard/mosque_confirm_delete.html:8
@@ -402,15 +402,15 @@ msgstr "تم حذف المسجد بنجاح!"
 
 #: dashboard/views.py:83
 msgid "Caller added successfully!"
-msgstr "تمت إضافة الداعي بنجاح!"
+msgstr "تمت إضافة الداعية بنجاح!"
 
 #: dashboard/views.py:96
 msgid "Caller updated successfully!"
-msgstr "تم تحديث الداعي بنجاح!"
+msgstr "تم تحديث الداعية بنجاح!"
 
 #: dashboard/views.py:107
 msgid "Caller deleted successfully!"
-msgstr "تم حذف الداعي بنجاح!"
+msgstr "تم حذف الداعية بنجاح!"
 
 #: dashboard/views.py:133
 msgid "Schedule added successfully!"

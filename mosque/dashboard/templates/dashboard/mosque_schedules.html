@@ -1,0 +1,114 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-0"><i class="bi bi-building-fill text-primary"></i> جداول المساجد</h2>
+    </div>
+    <div>
+        <form method="POST" action="{% url 'send_mosque_notification' %}" style="display: inline;" id="mosqueNotifyForm">
+            {% csrf_token %}
+            <input type="hidden" name="days_offset" value="{{ days_offset }}">
+            <button type="submit" class="btn btn-success btn-lg" onclick="return confirm('هل تريد إرسال إشعارات واتساب لجميع المساجد في هذا اليوم؟')">
+                <i class="bi bi-whatsapp"></i> إرسال إشعارات
+            </button>
+        </form>
+        <a href="{% url 'mosque_create' %}" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-circle"></i> إضافة مسجد
+        </a>
+    </div>
+</div>
+
+<!-- Tabs for days -->
+<ul class="nav nav-tabs mb-4" id="dayTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if days_offset == 0 %}active{% endif %}" href="?days=0" role="tab">
+            <i class="bi bi-calendar-day"></i> اليوم
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if days_offset == 1 %}active{% endif %}" href="?days=1" role="tab">
+            <i class="bi bi-calendar-plus"></i> غداً
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if days_offset == 2 %}active{% endif %}" href="?days=2" role="tab">
+            <i class="bi bi-calendar-week"></i> بعد غد
+        </a>
+    </li>
+</ul>
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title mb-0"><i class="bi bi-building"></i> المساجد المجدولة ليوم {{ weekday_display }}</h5>
+            <p class="text-muted mb-0"><i class="bi bi-calendar-event"></i> التاريخ الهجري: {{ hijri_date }}</p>
+        </div>
+        
+        {% if mosques %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-tag"></i> الاسم</th>
+                            <th><i class="bi bi-geo-alt"></i> العنوان</th>
+                            <th><i class="bi bi-telephone"></i> الهاتف</th>
+                            <th><i class="bi bi-sticky"></i> ملاحظات الإرسال</th>
+                            <th><i class="bi bi-gear"></i> الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mosque in mosques %}
+                        <tr>
+                            <td>
+                                <strong><i class="bi bi-building text-primary"></i> {{ mosque.name }}</strong>
+                                <span class="badge bg-success ms-2">مجدول</span>
+                            </td>
+                            <td><i class="bi bi-geo-alt-fill text-danger"></i> {{ mosque.address }}</td>
+                            <td><i class="bi bi-phone"></i> {{ mosque.get_full_phone|default:"غير متوفر" }}</td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" 
+                                       name="mosque_notes_{{ mosque.id }}" 
+                                       placeholder="ملاحظات إضافية..."
+                                       form="mosqueNotifyForm"
+                                       style="min-width: 150px;">
+                            </td>
+                            <td>
+                                <a href="{% url 'mosque_update' mosque.pk %}" class="btn btn-sm btn-warning">
+                                    <i class="bi bi-pencil"></i> تعديل
+                                </a>
+                                <a href="{% url 'mosque_delete' mosque.pk %}" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash"></i> حذف
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-inbox" style="font-size: 4rem;"></i>
+                <p class="mt-3">لا توجد مساجد مجدولة في هذا اليوم</p>
+                <a href="{% url 'schedule_create' %}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> إضافة جدول
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title"><i class="bi bi-info-circle-fill"></i> معلومات</h5>
+        <ul style="color: white;">
+            <li>عدد المساجد المجدولة ليوم {{ weekday_display }}: <strong>{{ mosques.count }}</strong></li>
+            <li>التاريخ الهجري: <strong>{{ hijri_date }}</strong></li>
+        </ul>
+        <div class="alert alert-info mt-3">
+            <i class="bi bi-lightbulb-fill"></i> <strong>نصيحة:</strong> استخدم زر "إرسال إشعارات" لإرسال رسائل واتساب تلقائية لجميع المساجد المجدولة في هذا اليوم.
+        </div>
+    </div>
+</div>
+{% endblock %}

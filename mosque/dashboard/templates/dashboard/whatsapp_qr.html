@@ -1,0 +1,97 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block title %}ربط واتساب{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white text-center">
+                    <h3><i class="fab fa-whatsapp"></i> ربط واتساب</h3>
+                </div>
+                <div class="card-body text-center">
+                    {% if is_ready %}
+                        <div class="alert alert-success" role="alert">
+                            <i class="fas fa-check-circle fa-3x mb-3"></i>
+                            <h4>تم الربط بنجاح!</h4>
+                            <p>واتساب متصل ويعمل بشكل صحيح</p>
+                        </div>
+                        <a href="{% url 'dashboard' %}" class="btn btn-primary">
+                            <i class="fas fa-home"></i> العودة للوحة التحكم
+                        </a>
+                    {% else %}
+                        {% if qr_data.authenticated %}
+                            <div class="alert alert-success" role="alert">
+                                <i class="fas fa-check-circle fa-3x mb-3"></i>
+                                <h4>تم الربط بنجاح!</h4>
+                                <p>واتساب متصل ويعمل بشكل صحيح</p>
+                            </div>
+                        {% elif qr_data.qr %}
+                            <div class="alert alert-info" role="alert">
+                                <h4>امسح رمز QR لربط واتساب</h4>
+                                <p>افتح واتساب على هاتفك ← الإعدادات ← الأجهزة المرتبطة ← ربط جهاز</p>
+                            </div>
+                            
+                            <div class="qr-container mb-4">
+                                <img src="{{ qr_data.qr }}" alt="WhatsApp QR Code" class="img-fluid" style="max-width: 400px; border: 3px solid #25D366; padding: 20px; background: white;">
+                            </div>
+                            
+                            <div class="alert alert-warning" role="alert">
+                                <i class="fas fa-info-circle"></i> قد تحتاج إلى تحديث الصفحة إذا لم يعمل الرمز
+                            </div>
+                            
+                            <button onclick="location.reload()" class="btn btn-primary">
+                                <i class="fas fa-sync"></i> تحديث الصفحة
+                            </button>
+                        {% else %}
+                            <div class="alert alert-warning" role="alert">
+                                <i class="fas fa-spinner fa-spin fa-3x mb-3"></i>
+                                <h4>جاري الانتظار...</h4>
+                                <p>{{ qr_data.message|default:"جاري تحميل رمز QR..." }}</p>
+                            </div>
+                            
+                            <button onclick="location.reload()" class="btn btn-primary mt-3">
+                                <i class="fas fa-sync"></i> تحديث الصفحة
+                            </button>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-right"></i> العودة
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card shadow mt-4">
+                <div class="card-header bg-info text-white">
+                    <h5><i class="fas fa-question-circle"></i> التعليمات</h5>
+                </div>
+                <div class="card-body text-right">
+                    <ol class="text-right" style="direction: rtl;">
+                        <li>تأكد من تشغيل خدمة واتساب على الخادم</li>
+                        <li>افتح تطبيق واتساب على هاتفك المحمول</li>
+                        <li>انتقل إلى الإعدادات ← الأجهزة المرتبطة</li>
+                        <li>اضغط على "ربط جهاز"</li>
+                        <li>امسح رمز QR المعروض أعلاه</li>
+                        <li>انتظر حتى يكتمل الاتصال</li>
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Auto-reload page every 10 seconds if not authenticated yet
+    {% if not is_ready and not qr_data.authenticated %}
+    setTimeout(function() {
+        location.reload();
+    }, 10000);
+    {% endif %}
+</script>
+{% endblock %}

@@ -22,6 +22,24 @@ class WhatsAppWebService:
             print(f"Error checking WhatsApp service status: {e}")
             return False
     
+    def get_qr_code(self):
+        """
+        Get QR code for WhatsApp authentication
+        
+        Returns:
+            dict: {'authenticated': bool, 'qr': str (data URL), 'message': str}
+        """
+        try:
+            response = requests.get(f'{self.base_url}/qr', timeout=5)
+            if response.status_code == 200:
+                return response.json()
+            else:
+                return {'authenticated': False, 'message': 'Failed to get QR code'}
+        except requests.exceptions.ConnectionError:
+            return {'authenticated': False, 'message': 'Cannot connect to WhatsApp service. Make sure the Node.js server is running.'}
+        except Exception as e:
+            return {'authenticated': False, 'message': f'Error: {str(e)}'}
+    
     def send_message(self, phone_number, message):
         """
         Send WhatsApp message
@@ -49,7 +67,7 @@ class WhatsAppWebService:
                 f'{self.base_url}/send',
                 json=data,
                 headers={'Content-Type': 'application/json'},
-                timeout=30
+                timeout=120  # Increased timeout to 2 minutes
             )
             
             if response.status_code == 200:

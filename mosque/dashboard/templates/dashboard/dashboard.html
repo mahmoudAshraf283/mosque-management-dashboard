@@ -1,5 +1,6 @@
 {% extends "dashboard/base.html" %}
 {% load i18n %}
+{% load hijri_filters %}
 
 {% block content %}
 <div class="text-center mb-5">
@@ -7,6 +8,9 @@
         <i class="bi bi-building"></i> لوحة تحكم إدارة المساجد
     </h1>
     <p class="lead text-muted">إدارة شاملة للمساجد والدعاة والجداول</p>
+    <div class="alert alert-info mt-3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white;">
+        <i class="bi bi-calendar-event"></i> التاريخ الهجري: {% today_hijri %}
+    </div>
 </div>
 
 <div class="row g-4 mb-5">
@@ -33,7 +37,7 @@
                 </h5>
                 <h2>{{ imam_count }}</h2>
                 <a href="{% url 'imam_create' %}" class="btn btn-light mt-3">
-                    <i class="bi bi-plus-circle"></i> إضافة داعي
+                    <i class="bi bi-plus-circle"></i> إضافة داعية
                 </a>
             </div>
         </div>
@@ -66,7 +70,7 @@
                 <thead>
                     <tr>
                         <th><i class="bi bi-building"></i> المسجد</th>
-                        <th><i class="bi bi-person"></i> الداعي</th>
+                        <th><i class="bi bi-person"></i> الداعية</th>
                         <th><i class="bi bi-clock"></i> وقت الصلاة</th>
                         <th><i class="bi bi-whatsapp"></i> الاتصال</th>
                     </tr>

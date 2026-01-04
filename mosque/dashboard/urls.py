@@ -6,9 +6,11 @@ urlpatterns = [
     
     # Mosque URLs
     path('mosques/', views.mosque_list, name='mosque_list'),
+    path('mosques/schedules/', views.mosque_schedules, name='mosque_schedules'),
     path('mosques/create/', views.mosque_create, name='mosque_create'),
     path('mosques/<int:pk>/edit/', views.mosque_update, name='mosque_update'),
     path('mosques/<int:pk>/delete/', views.mosque_delete, name='mosque_delete'),
+    path('mosques/notify/', views.send_mosque_notification, name='send_mosque_notification'),
     
     # Imam URLs
     path('imams/', views.imam_list, name='imam_list'),
@@ -23,4 +25,7 @@ urlpatterns = [
     path('schedules/create/', views.schedule_create, name='schedule_create'),
     path('schedules/<int:pk>/edit/', views.schedule_update, name='schedule_update'),
     path('schedules/<int:pk>/delete/', views.schedule_delete, name='schedule_delete'),
+    
+    # WhatsApp URLs
+    path('whatsapp/qr/', views.whatsapp_qr, name='whatsapp_qr'),
 ]

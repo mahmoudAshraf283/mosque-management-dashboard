@@ -1,13 +1,17 @@
 {% extends "dashboard/base.html" %}
 {% load i18n %}
+{% load hijri_filters %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="text-primary"><i class="bi bi-calendar-day-fill"></i> جدول اليوم - {{ weekday_display }}</h1>
     <div>
-        <form method="POST" action="{% url 'send_today_reminders' %}" style="display: inline;">
+        <h1 class="text-primary"><i class="bi bi-calendar-day-fill"></i> الجدول اليومي</h1>
+    </div>
+    <div>
+        <form method="POST" action="{% url 'send_today_reminders' %}" style="display: inline;" id="reminderForm">
             {% csrf_token %}
-            <button type="submit" class="btn btn-success btn-lg" onclick="return confirm('هل تريد إرسال تذكيرات واتساب لجميع الدعاة اليوم؟')">
+            <input type="hidden" name="days_offset" value="{{ days_offset }}">
+            <button type="submit" class="btn btn-success btn-lg" onclick="return confirm('هل تريد إرسال تذكيرات واتساب لجميع الدعاة في هذا اليوم؟')">
                 <i class="bi bi-whatsapp"></i> إرسال تذكيرات
             </button>
         </form>
@@ -17,25 +21,50 @@
     </div>
 </div>
 
+<!-- Tabs for days -->
+<ul class="nav nav-tabs mb-4" id="dayTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if days_offset == 0 %}active{% endif %}" href="?days=0" role="tab">
+            <i class="bi bi-calendar-day"></i> اليوم
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if days_offset == 1 %}active{% endif %}" href="?days=1" role="tab">
+            <i class="bi bi-calendar-plus"></i> غداً
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if days_offset == 2 %}active{% endif %}" href="?days=2" role="tab">
+            <i class="bi bi-calendar-week"></i> بعد غد
+        </a>
+    </li>
+</ul>
+
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title"><i class="bi bi-calendar-check-fill"></i> الصلوات المجدولة ليوم {{ weekday_display }} - {{ today_date }}</h5>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title mb-0"><i class="bi bi-calendar-check-fill"></i> الصلوات المجدولة ليوم {{ weekday_display }}</h5>
+            <p class="text-muted mb-0"><i class="bi bi-calendar-event"></i> التاريخ الهجري: {{ hijri_date }}</p>
+        </div>
         
         {% if schedules %}
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th><i class="bi bi-calendar-event"></i> التاريخ</th>
                             <th><i class="bi bi-building-fill"></i> المسجد</th>
-                            <th><i class="bi bi-person-fill"></i> الداعي</th>
+                            <th><i class="bi bi-person-fill"></i> الداعية</th>
                             <th><i class="bi bi-telephone-fill"></i> الهاتف (واتساب)</th>
                             <th><i class="bi bi-calendar-check-fill"></i> وقت الصلاة</th>
+                            <th><i class="bi bi-sticky"></i> ملاحظات الإرسال</th>
                             <th><i class="bi bi-pencil-square"></i> الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for schedule in schedules %}
                         <tr>
+                            <td style="color: white;">{{ hijri_date }}</td>
                             <td style="color: white;">{{ schedule.mosque.name }}</td>
                             <td style="color: white;">{{ schedule.imam.name }}</td>
                             <td style="color: white;">
@@ -45,6 +74,13 @@
                             </td>
                             <td style="color: white;">
                                 <span class="badge bg-primary">{{ schedule.get_prayer_time_display }}</span>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" 
+                                       name="notes_{{ schedule.id }}" 
+                                       placeholder="ملاحظات إضافية..."
+                                       form="reminderForm"
+                                       style="min-width: 150px;">
                             </td>
                             <td>
                                 <a href="{% url 'schedule_update' schedule.pk %}" class="btn btn-sm btn-warning">
@@ -75,9 +111,9 @@
     <div class="card-body">
         <h5 class="card-title"><i class="bi bi-info-circle-fill"></i> معلومات</h5>
         <ul style="color: white;">
-            <li>عدد الصلوات المجدولة اليوم: <strong>{{ schedules.count }}</strong></li>
+            <li>عدد الصلوات المجدولة: <strong>{{ schedules.count }}</strong></li>
             <li>اليوم: <strong>{{ weekday_display }}</strong></li>
-            <li>التاريخ: <strong>{{ today_date }}</strong></li>
+            <li>التاريخ الهجري: <strong>{{ hijri_date }}</strong></li>
         </ul>
         <div class="alert alert-info mt-3">
             <i class="bi bi-lightbulb-fill"></i> <strong>نصيحة:</strong> استخدم زر "إرسال تذكيرات" لإرسال رسائل واتساب تلقائية لجميع الدعاة المجدولين اليوم.

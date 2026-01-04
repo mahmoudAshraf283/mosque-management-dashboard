@@ -5,6 +5,7 @@ from dashboard.whatsapp_web_service import WhatsAppWebService
 import datetime
 import time
 import random
+from hijri_converter import Gregorian
 
 
 class Command(BaseCommand):
@@ -62,16 +63,30 @@ class Command(BaseCommand):
             prayer_time_display = dict(Schedule.PRAYER_TIME_CHOICES).get(schedule.prayer_time)
             weekday_display = dict(Schedule.WEEKDAY_CHOICES).get(schedule.weekday)
             
+            # Convert to Hijri date
+            hijri_date = Gregorian(today.year, today.month, today.day).to_hijri()
+            hijri_months = [
+                'محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة',
+                'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
+            ]
+            hijri_month_name = hijri_months[hijri_date.month - 1]
+            hijri_date_str = f"{hijri_date.day} {hijri_month_name} {hijri_date.year} هـ"
+            
             # Create message
             message = f"""السلام عليكم ورحمة الله وبركاته
 
-تذكير: لديك موعد إمامة اليوم
+تذكير: لديك موعد إلقاء كلمة اليوم
 🕌 المسجد: {mosque.name}
 📍 الموقع: {mosque.address}
+📅 التاريخ: {hijri_date_str}
 📅 اليوم: {weekday_display}
-🕌 الصلاة: {prayer_time_display}
-
-جزاك الله خيراً"""
+🕌 الصلاة: {prayer_time_display}"""
+            
+            # Add mosque phone number if available
+            if mosque.phone:
+                message += f"\n📞 هاتف المسجد: {mosque.phone}"
+            
+            message += "\n\nعند الانتهاء من إلقاء الكلمة يرجى إرسال رسالة:\n\"تم الانتهاء من إلقاء الكلمة\"\n\nجزاك الله خيراً"
             
             phone_number = imam.get_full_phone()
             
@@ -89,14 +104,6 @@ class Command(BaseCommand):
                 else:
                     self.stdout.write(self.style.ERROR(f'✗ Failed to send to {imam.name}: {response_message}'))
                     failed_count += 1
-                
-                # Add human-like delay between messages (2-5 minutes)
-                # Skip delay after the last message
-                if index < total_schedules:
-                    delay_seconds = random.randint(120, 300)  # 2-5 minutes in seconds
-                    delay_minutes = delay_seconds / 60
-                    self.stdout.write(self.style.WARNING(f'⏳ Waiting {delay_minutes:.1f} minutes before next message ({index}/{total_schedules})...'))
-                    time.sleep(delay_seconds)
         
         # Summary
         self.stdout.write(self.style.SUCCESS(f'\n=== Summary ==='))

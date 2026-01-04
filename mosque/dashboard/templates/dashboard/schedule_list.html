@@ -1,9 +1,13 @@
 {% extends "dashboard/base.html" %}
 {% load i18n %}
+{% load hijri_filters %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="text-primary"><i class="bi bi-calendar-week-fill"></i> الجدول الأسبوعي</h1>
+    <div>
+        <h1 class="text-primary"><i class="bi bi-calendar-week-fill"></i> الجدول الأسبوعي</h1>
+        <p class="text-muted"><i class="bi bi-calendar-event"></i> التاريخ الهجري: {% today_hijri %}</p>
+    </div>
     <a href="{% url 'schedule_create' %}" class="btn btn-primary btn-lg">
         <i class="bi bi-plus-circle"></i> إضافة جدول
     </a>
@@ -15,9 +19,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
+                        <th><i class="bi bi-calendar-event"></i> التاريخ</th>
                         <th><i class="bi bi-calendar-fill"></i> اليوم</th>
                         <th><i class="bi bi-building-fill"></i> المسجد</th>
-                        <th><i class="bi bi-person-fill"></i> الداعي</th>
+                        <th><i class="bi bi-person-fill"></i> الداعية</th>
                         <th><i class="bi bi-calendar-check-fill"></i> وقت الصلاة</th>
                         <th><i class="bi bi-telephone-fill"></i> الاتصال</th>
                         <th><i class="bi bi-pencil-square"></i> الإجراءات</th>
@@ -26,7 +31,8 @@
                 <tbody>
                     {% for schedule in schedules %}
                     <tr>
-                        <td style="color: white;"><span class="badge bg-info">{{ schedule.get_weekday_display }}</span></td>
+                        <td style="color: white;">{{ weekday_dates|get_item:schedule.weekday }}</td>
+                        <td style="color: white;">{{ schedule.get_weekday_display }}</td>
                         <td style="color: white;">{{ schedule.mosque.name }}</td>
                         <td style="color: white;">{{ schedule.imam.name }}</td>
                         <td style="color: white;"><span class="badge bg-primary">{{ schedule.get_prayer_time_display }}</span></td>
