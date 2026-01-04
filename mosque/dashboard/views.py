@@ -140,14 +140,14 @@ def send_mosque_notification(request):
     
     if not mosques_with_schedules.exists():
         messages.warning(request, 'لا توجد مساجد لديها جداول في هذا اليوم')
-        return redirect(f'mosque_schedules?days={days_offset}')
+        return redirect(f'/mosques/schedules/?days={days_offset}')
     
     # Initialize WhatsApp service
     whatsapp = WhatsAppWebService()
     
     if not whatsapp.is_ready():
         messages.error(request, 'خدمة واتساب غير جاهزة. يرجى التأكد من تشغيلها والمصادقة عليها.')
-        return redirect(f'mosque_schedules?days={days_offset}')
+        return redirect(f'/mosques/schedules/?days={days_offset}')
     
     # Convert to Hijri date
     hijri_date = Gregorian(target_date.year, target_date.month, target_date.day).to_hijri()
@@ -217,7 +217,7 @@ def send_mosque_notification(request):
     if failed_count > 0:
         messages.warning(request, _(f'فشل إرسال {failed_count} إشعار.'))
     
-    return redirect(f'mosque_schedules?days={days_offset}')
+    return redirect(f'/mosques/schedules/?days={days_offset}')
 
 
 # Imam Views
@@ -417,14 +417,14 @@ def send_today_reminders(request):
     
     if not schedules.exists():
         messages.warning(request, _('No schedules found for the selected day.'))
-        return redirect(f'today_schedule?days={days_offset}')
+        return redirect(f'/schedules/today/?days={days_offset}')
     
     # Initialize WhatsApp service
     whatsapp = WhatsAppWebService()
     
     if not whatsapp.is_ready():
         messages.error(request, _('WhatsApp service is not ready. Please make sure it is running and authenticated.'))
-        return redirect(f'today_schedule?days={days_offset}')
+        return redirect(f'/schedules/today/?days={days_offset}')
     
     # Send notifications
     sent_count = 0
@@ -489,7 +489,7 @@ def send_today_reminders(request):
     if failed_count > 0:
         messages.warning(request, _(f'Failed to send {failed_count} reminder(s).'))
     
-    return redirect(f'today_schedule?days={days_offset}')
+    return redirect(f'/schedules/today/?days={days_offset}')
 
 
 def whatsapp_qr(request):
