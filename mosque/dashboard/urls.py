@@ -7,6 +7,7 @@ urlpatterns = [
     # Mosque URLs
     path('mosques/', views.mosque_list, name='mosque_list'),
     path('mosques/schedules/', views.mosque_schedules, name='mosque_schedules'),
+    path('mosques/send-weekly-reminders/', views.send_weekly_mosque_reminders, name='send_weekly_mosque_reminders'),
     path('mosques/create/', views.mosque_create, name='mosque_create'),
     path('mosques/<int:pk>/edit/', views.mosque_update, name='mosque_update'),
     path('mosques/<int:pk>/delete/', views.mosque_delete, name='mosque_delete'),
@@ -20,6 +21,7 @@ urlpatterns = [
     
     # Schedule URLs
     path('schedules/', views.schedule_list, name='schedule_list'),
+    path('schedules/send-weekly-reminders/', views.send_weekly_reminders, name='send_weekly_reminders'),
     path('schedules/today/', views.today_schedule, name='today_schedule'),
     path('schedules/today/send-reminders/', views.send_today_reminders, name='send_today_reminders'),
     path('schedules/create/', views.schedule_create, name='schedule_create'),

@@ -10,7 +10,7 @@
     <div>
         <form method="POST" action="{% url 'send_today_reminders' %}" style="display: inline;" id="reminderForm">
             {% csrf_token %}
-            <input type="hidden" name="days_offset" value="{{ days_offset }}">
+            <input type="hidden" name="target_weekday" value="{{ target_weekday }}">
             <button type="submit" class="btn btn-success btn-lg" onclick="return confirm('هل تريد إرسال تذكيرات واتساب لجميع الدعاة في هذا اليوم؟')">
                 <i class="bi bi-whatsapp"></i> إرسال تذكيرات
             </button>
@@ -24,18 +24,38 @@
 <!-- Tabs for days -->
 <ul class="nav nav-tabs mb-4" id="dayTabs" role="tablist">
     <li class="nav-item" role="presentation">
-        <a class="nav-link {% if days_offset == 0 %}active{% endif %}" href="?days=0" role="tab">
-            <i class="bi bi-calendar-day"></i> اليوم
+        <a class="nav-link {% if target_weekday == 0 %}active{% endif %}" href="?weekday=0" role="tab">
+            <i class="bi bi-calendar"></i> السبت
         </a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link {% if days_offset == 1 %}active{% endif %}" href="?days=1" role="tab">
-            <i class="bi bi-calendar-plus"></i> غداً
+        <a class="nav-link {% if target_weekday == 1 %}active{% endif %}" href="?weekday=1" role="tab">
+            <i class="bi bi-calendar"></i> الأحد
         </a>
     </li>
     <li class="nav-item" role="presentation">
-        <a class="nav-link {% if days_offset == 2 %}active{% endif %}" href="?days=2" role="tab">
-            <i class="bi bi-calendar-week"></i> بعد غد
+        <a class="nav-link {% if target_weekday == 2 %}active{% endif %}" href="?weekday=2" role="tab">
+            <i class="bi bi-calendar"></i> الإثنين
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if target_weekday == 3 %}active{% endif %}" href="?weekday=3" role="tab">
+            <i class="bi bi-calendar"></i> الثلاثاء
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if target_weekday == 4 %}active{% endif %}" href="?weekday=4" role="tab">
+            <i class="bi bi-calendar"></i> الأربعاء
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if target_weekday == 5 %}active{% endif %}" href="?weekday=5" role="tab">
+            <i class="bi bi-calendar"></i> الخميس
+        </a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {% if target_weekday == 6 %}active{% endif %}" href="?weekday=6" role="tab">
+            <i class="bi bi-calendar"></i> الجمعة
         </a>
     </li>
 </ul>

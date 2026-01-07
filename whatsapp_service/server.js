@@ -42,6 +42,38 @@ client.on('auth_failure', (msg) => {
 client.on('disconnected', (reason) => {
     console.log('Client was disconnected:', reason);
     isReady = false;
+    latestQR = null;
+    
+    // Auto-restart after disconnect (production fix)
+    console.log('Attempting to reconnect in 5 seconds...');
+    setTimeout(() => {
+        client.initialize().catch(err => {
+            console.error('Failed to reinitialize:', err);
+            // Exit process to let PM2/Docker restart it
+            process.exit(1);
+        });
+    }, 5000);
+});
+
+// Handle process termination gracefully
+process.on('SIGINT', async () => {
+    console.log('Shutting down gracefully...');
+    try {
+        await client.destroy();
+    } catch (err) {
+        console.error('Error during shutdown:', err);
+    }
+    process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+    console.log('Received SIGTERM, shutting down...');
+    try {
+        await client.destroy();
+    } catch (err) {
+        console.error('Error during shutdown:', err);
+    }
+    process.exit(0);
 });
 
 // Initialize the client
